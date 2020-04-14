@@ -1,5 +1,8 @@
+import com.bridgelabz.exception.ParkingLotException;
+
 public class ParkingLotSystem {
-    public static void main(String[] args) {
-        System.out.println("Welcome to parking lot tdd problem");
+
+    public boolean park(Object vehicle) {
+        return true;
     }
 }
