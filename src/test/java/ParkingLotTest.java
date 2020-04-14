@@ -27,7 +27,14 @@ public class ParkingLotTest {
             parkingLotSystem.park(vehicle);
             parkingLotSystem.park(new Object());
         } catch (ParkingLotException e) {
-            Assert.assertEquals(ParkingLotException.ExceptionType.NO_SPACE,e.type);
+            Assert.assertEquals(ParkingLotException.ExceptionType.NO_SPACE, e.type);
         }
+    }
+
+    @Test
+    public void givenAVehicle_whenUnParked_ShouldReturnTrue() throws ParkingLotException {
+        parkingLotSystem.park(vehicle);
+        boolean isUnParked = parkingLotSystem.Unpark(vehicle);
+        Assert.assertTrue(isUnParked);
     }
 }
