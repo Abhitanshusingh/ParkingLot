@@ -1,7 +1,7 @@
 package com.bridgelabz.exception;
 
 public class ParkingLotException extends Exception {
-   public enum ExceptionType {NO_SPACE}
+   public enum ExceptionType {NO_SPACE,NO_SUCH_VEHICLE}
 
     public ExceptionType type;
 
