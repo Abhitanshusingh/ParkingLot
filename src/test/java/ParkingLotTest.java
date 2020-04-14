@@ -37,4 +37,13 @@ public class ParkingLotTest {
         boolean isUnParked = parkingLotSystem.Unpark(vehicle);
         Assert.assertTrue(isUnParked);
     }
+
+    @Test
+    public void givenNoVehicle_whenUnParked_ShouldReturnFalse()  {
+        try {
+            parkingLotSystem.Unpark(vehicle);
+        } catch (ParkingLotException e) {
+            Assert.assertEquals(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE, e.type);
+        }
+    }
 }
