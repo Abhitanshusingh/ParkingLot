@@ -12,4 +12,14 @@ public class ParkingLotSystem {
         this.vehicle = vehicle;
         return true;
     }
+
+    public boolean Unpark(Object vehicle) throws ParkingLotException {
+        if (this.vehicle == null)
+            throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,"No vehicle in parking lot");
+        if (this.vehicle.equals(vehicle)) {
+            this.vehicle = null;
+            return true;
+        }
+        return false;
+    }
 }
