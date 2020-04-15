@@ -60,7 +60,7 @@ public class ParkingLotTest {
             parkingLotSystem.park(vehicle);
             parkingLotSystem.park(new Object());
         } catch (ParkingLotException e) {
-            Assert.assertEquals("Parking lot is full", e.getMessage());
+            Assert.assertEquals("full", ParkingLotSystem.parkingLotFull);
         }
     }
 }
