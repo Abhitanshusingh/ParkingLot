@@ -31,7 +31,7 @@ public class ParkingLotTest {
     @Test
     public void givenAVehicle_whenUnParked_shouldReturnFalse() throws ParkingLotException {
         parkingLotSystem.park("Mustang Dodge Demon");
-        parkingLotSystem.Unpark("Mustang Dodge Demon");
+        parkingLotSystem.unPark("Mustang Dodge Demon");
         boolean isVehicle = parkingLotSystem.isVehicleParked();
         Assert.assertFalse(isVehicle);
     }
@@ -39,7 +39,7 @@ public class ParkingLotTest {
     @Test
     public void givenNoVehicle_whenUnParked_shouldThrowException() {
         try {
-            parkingLotSystem.Unpark("Mahindra Thar");
+            parkingLotSystem.unPark("Mahindra Thar");
         } catch (ParkingLotException e) {
             Assert.assertEquals(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE, e.type);
         }
@@ -49,7 +49,7 @@ public class ParkingLotTest {
     public void givenAVehicle_whenUnParkedDifferentVehicle_shouldThrowException() throws ParkingLotException {
         try {
             parkingLotSystem.park("Mustang GT500");
-            parkingLotSystem.Unpark("Mahindra thar");
+            parkingLotSystem.unPark("Mahindra thar");
         } catch (ParkingLotException e) {
             Assert.assertEquals("Vehicle is not in parking lot", e.getMessage());
         }
@@ -94,8 +94,18 @@ public class ParkingLotTest {
 
     @Test
     public void givenParkingLot_whenSpace_securityStaffShouldBeUpdate() throws ParkingLotException {
+        parkingLotSystem.register(airportSecurity);
         parkingLotSystem.park("Mustang GT500");
         parkingLotSystem.park("Mahindra thar");
         Assert.assertFalse(airportSecurity.isParkingFull());
+    }
+
+    @Test
+    public void givenParkingLot_whenParkingLotHaveSpace_ownerPutVacantSign() throws ParkingLotException {
+        parkingLotSystem.register(parkingLotOwner);
+        parkingLotSystem.park("Dorge Challenger");
+        parkingLotSystem.park("Chevrolet camaro LT");
+        parkingLotSystem.unPark("Dorge Challenger");
+        parkingLotSystem.park("Mustang GT500");
     }
 }
