@@ -25,7 +25,7 @@ public class ParkingLotSystem implements IParkingLotSubject {
         this.notifyObservers();
     }
 
-    public void Unpark(String vehicle) throws ParkingLotException {
+    public void unPark(String vehicle) throws ParkingLotException {
         if (!parkedVehicleList.contains(vehicle))
             throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE, "Vehicle is not in parking lot");
         parkedVehicleList.remove(vehicle);
