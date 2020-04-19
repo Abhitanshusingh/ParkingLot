@@ -1,5 +1,7 @@
 import com.bridgelabz.exception.ParkingLotException;
 import com.bridgelabz.service.ParkingLotSystem;
+import com.bridgelabz.utility.AirportSecurity;
+import com.bridgelabz.utility.ParkingLotOwner;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,11 +10,15 @@ public class ParkingLotTest {
 
     ParkingLotSystem parkingLotSystem = null;
     Object vehicle = null;
+    ParkingLotOwner parkingLotOwner = null;
+    AirportSecurity airportSecurity = null;
 
     @Before
     public void SetUp() throws Exception {
         parkingLotSystem = new ParkingLotSystem(3);
         vehicle = new Object();
+        parkingLotOwner = new ParkingLotOwner();
+        airportSecurity = new AirportSecurity();
     }
 
     @Test
@@ -58,5 +64,38 @@ public class ParkingLotTest {
         } catch (ParkingLotException e) {
             Assert.assertEquals(ParkingLotException.ExceptionType.NO_SPACE, "Parking lot is full");
         }
+    }
+
+    @Test
+    public void givenParkringLot_whenParkingLotFull_shouldShowFullSign() throws ParkingLotException {
+        parkingLotSystem.register(parkingLotOwner);
+        parkingLotSystem.park("Mustang Dodge Demon");
+        parkingLotSystem.park("Mustang GT500");
+        parkingLotSystem.park("Mustang Ecoboost");
+        Assert.assertEquals(parkingLotOwner.getSign(), ParkingLotOwner.Sign.PARKING_IS_FULL);
+    }
+
+    @Test
+    public void givenParkintLot_whenParkingLotVacant_shouldShowVacantSign() throws ParkingLotException {
+        parkingLotSystem.register(parkingLotOwner);
+        parkingLotSystem.park("Classic Jeep");
+        parkingLotSystem.park("Mahindra thar");
+        Assert.assertEquals(parkingLotOwner.getSign(), ParkingLotOwner.Sign.PARKING_IS_VACANT);
+    }
+
+    @Test
+    public void givenParkingLot_whenParkingLotFull_securityStaffShouldBeUpdate() throws ParkingLotException {
+        parkingLotSystem.register(airportSecurity);
+        parkingLotSystem.park("Dorge Challenger");
+        parkingLotSystem.park("Chevrolet camaro LT");
+        parkingLotSystem.park("Ford Mustang Ecoboost");
+        Assert.assertTrue(airportSecurity.isParkingFull());
+    }
+
+    @Test
+    public void givenParkingLot_whenSpace_securityStaffShouldBeUpdate() throws ParkingLotException {
+        parkingLotSystem.park("Mustang GT500");
+        parkingLotSystem.park("Mahindra thar");
+        Assert.assertFalse(airportSecurity.isParkingFull());
     }
 }
