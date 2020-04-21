@@ -24,7 +24,7 @@ public class ParkingLotTest {
     @Test
     public void givenAVehicle_whenParked_shouldReturnTrue() throws ParkingLotException {
         parkingLotSystem.park("Mustang GT500");
-        boolean isParked = parkingLotSystem.isVehicleParked();
+        boolean isParked = parkingLotSystem.isVehicleInParkingLot("Mustang GT500");
         Assert.assertTrue(isParked);
     }
 
@@ -32,7 +32,7 @@ public class ParkingLotTest {
     public void givenAVehicle_whenUnParked_shouldReturnFalse() throws ParkingLotException {
         parkingLotSystem.park("Mustang Dodge Demon");
         parkingLotSystem.unPark("Mustang Dodge Demon");
-        boolean isVehicle = parkingLotSystem.isVehicleParked();
+        boolean isVehicle = parkingLotSystem.isVehicleInParkingLot("Mustang Dodge Demon");
         Assert.assertFalse(isVehicle);
     }
 
