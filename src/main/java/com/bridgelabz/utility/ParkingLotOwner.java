@@ -22,10 +22,10 @@ public class ParkingLotOwner implements IParkingLotObserver {
             sign = sign.PARKING_IS_VACANT;
     }
 
-    public static Integer getPakringSlotToPakr(HashMap<Integer, String> parkingLot) {
-        for (int parkingSlot = 1; parkingSlot <= parkingLot.size(); parkingSlot++) {
-            if (parkingLot.get(parkingSlot) == null)
-                return parkingSlot;
+    public static Integer getPakringSlotToPakr(HashMap<Integer, String> vehicleParkedDetail) {
+        for (int parkingSlots = 1; parkingSlots <= vehicleParkedDetail.size(); parkingSlots++) {
+            if (vehicleParkedDetail.get(parkingSlots) == null)
+                return parkingSlots;
         }
         return null;
     }

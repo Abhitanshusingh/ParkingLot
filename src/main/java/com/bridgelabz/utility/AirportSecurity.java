@@ -13,8 +13,8 @@ public class AirportSecurity implements IParkingLotObserver {
     }
 
     @Override
-    public void sendParkingStatus(HashMap<Integer, String> parkingLot) {
-        if (ParkingLotSystem.isParkingLotFull(parkingLot))
+    public void sendParkingStatus(HashMap<Integer, String> vehicleParkedDetail) {
+        if (ParkingLotSystem.isParkingLotFull(vehicleParkedDetail))
             this.isParkingFull = true;
         else
             this.isParkingFull = false;
