@@ -108,4 +108,22 @@ public class ParkingLotTest {
         parkingLotSystem.unPark("Dorge Challenger");
         parkingLotSystem.park("Mustang GT500");
     }
+
+    @Test
+    public void givenVehicle_GetInParkingLot_ShouldReturnTrue() throws ParkingLotException {
+        parkingLotSystem.park("Mustang Dodge Demon");
+        parkingLotSystem.park("Mustang GT500");
+        parkingLotSystem.park("Mustang Ecoboost");
+        boolean isPresent = parkingLotSystem.isVehicleInParkingLot("Mustang GT500");
+        Assert.assertTrue(isPresent);
+    }
+
+    @Test
+    public void givenVehicle_whenNotGetInParkingLot_ShouldReturnFalse() throws ParkingLotException {
+        parkingLotSystem.park("Mustang Dodge Demon");
+        parkingLotSystem.park("Mustang GT500");
+        parkingLotSystem.park("Mustang Ecoboost");
+        boolean isPresent = parkingLotSystem.isVehicleInParkingLot("Mustang GT600");
+        Assert.assertFalse(isPresent);
+    }
 }
