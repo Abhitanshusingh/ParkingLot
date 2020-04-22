@@ -3,10 +3,12 @@ package com.bridgelabz.utility;
 import com.bridgelabz.observer.IParkingLotObserver;
 import com.bridgelabz.service.ParkingLotSystem;
 
+import java.time.LocalTime;
 import java.util.HashMap;
 
 public class ParkingLotOwner implements IParkingLotObserver {
 
+    public  LocalTime parkedTimeData;
     public enum Sign {PARKING_IS_FULL, PARKING_IS_VACANT};
     Sign sign;
 
