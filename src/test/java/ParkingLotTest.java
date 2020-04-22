@@ -1,10 +1,13 @@
 import com.bridgelabz.exception.ParkingLotException;
 import com.bridgelabz.service.ParkingLotSystem;
 import com.bridgelabz.utility.AirportSecurity;
+import com.bridgelabz.utility.ParkingBill;
 import com.bridgelabz.utility.ParkingLotOwner;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.time.LocalTime;
 
 public class ParkingLotTest {
 
@@ -12,6 +15,7 @@ public class ParkingLotTest {
     Object vehicle = null;
     ParkingLotOwner parkingLotOwner = null;
     AirportSecurity airportSecurity = null;
+    ParkingBill parkingBill = null;
 
     @Before
     public void SetUp() throws Exception {
@@ -19,6 +23,7 @@ public class ParkingLotTest {
         vehicle = new Object();
         parkingLotOwner = new ParkingLotOwner();
         airportSecurity = new AirportSecurity();
+        parkingBill = new ParkingBill();
     }
 
     @Test
@@ -107,10 +112,11 @@ public class ParkingLotTest {
         parkingLotSystem.park("Chevrolet camaro LT");
         parkingLotSystem.unPark("Dorge Challenger");
         parkingLotSystem.park("Mustang GT500");
+        Assert.assertEquals(ParkingLotOwner.Sign.PARKING_IS_VACANT,parkingLotOwner.getSign());
     }
 
     @Test
-    public void givenVehicle_GetInParkingLot_ShouldReturnTrue() throws ParkingLotException {
+    public void givenAVehicle_GetInParkingLot_shouldReturnTrue() throws ParkingLotException {
         parkingLotSystem.park("Mustang Dodge Demon");
         parkingLotSystem.park("Mustang GT500");
         parkingLotSystem.park("Mustang Ecoboost");
@@ -119,11 +125,25 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void givenVehicle_whenNotGetInParkingLot_ShouldReturnFalse() throws ParkingLotException {
+    public void givenAVehicle_whenNotGetInParkingLot_shouldReturnFalse() throws ParkingLotException {
         parkingLotSystem.park("Mustang Dodge Demon");
         parkingLotSystem.park("Mustang GT500");
         parkingLotSystem.park("Mustang Ecoboost");
         boolean isPresent = parkingLotSystem.isVehicleInParkingLot("Mustang GT600");
         Assert.assertFalse(isPresent);
+    }
+    @Test
+    public void givenAVehicle_whenParkedAndThenUnparked_shouldReturnParkedCharge() throws ParkingLotException {
+        parkingLotSystem.park("Bugatti chiron");
+        parkingLotSystem.unPark("Bugatti chiron");
+        Assert.assertEquals(parkingBill.generateParkingBill(),0,0.0);
+    }
+
+    @Test
+    public void givenAVehicle_whenParkedAndThenUnparked_shouldReturnParkedCharge1() throws ParkingLotException, InterruptedException {
+        parkingLotSystem.park("Bugatti chiron");
+
+        parkingLotSystem.unPark("Bugatti chiron");
+        Assert.assertNotEquals(parkingBill.generateParkingBill(),0.5,0.0);
     }
 }
