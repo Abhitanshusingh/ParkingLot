@@ -145,7 +145,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void givenManyVehicles_WhenParkedEvenly_ShouldReturnPosition() throws ParkingLotException {
+    public void givenManyVehicles_whenParkedEvenly_shouldReturnPosition() throws ParkingLotException {
         parkingLotSystem.park(vehicle1, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle2, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle3, DriverType.NORMAL, VehicleType.SMALL);
@@ -171,7 +171,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void givenAVehicle_IfDriverIsHandicapped_ShouldBeParkedInNearestSlot() throws ParkingLotException {
+    public void givenAVehicle_ifDriverIsHandicapped_shouldBeParkedInNearestSlot() throws ParkingLotException {
         parkingLotSystem.park(vehicle1, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle2, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle3, DriverType.NORMAL, VehicleType.SMALL);
@@ -185,7 +185,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void givenALargeVehicle_WhenParked_ShouldBeParkedWithLargestFreeSpace() throws ParkingLotException {
+    public void givenALargeVehicle_whenParked_shouldBeParkedWithLargestFreeSpace() throws ParkingLotException {
         parkingLotSystem.park(vehicle1, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle2, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle3, DriverType.NORMAL, VehicleType.SMALL);
@@ -197,5 +197,14 @@ public class ParkingLotTest {
                 Assert.assertEquals(6, entry.getKey().slotID);
             }
         }
+    }
+
+    @Test
+    public void givenParkingLot_whenParkedWhiteCar_shouldFindLocationOfWhiteCar() throws ParkingLotException {
+        parkingLotSystem.park(vehicle1, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle2, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle3, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle4, DriverType.NORMAL, VehicleType.SMALL);
+        Assert.assertEquals(2, parkingLotSystem.getWhiteCars());
     }
 }
