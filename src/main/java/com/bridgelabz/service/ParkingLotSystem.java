@@ -74,4 +74,15 @@ public class ParkingLotSystem {
         }
         return counter;
     }
+
+    public int getBmwCars() {
+        int counter = 0;
+        for (Map.Entry<Slot, Vehicle> entry : vehicleParkedDetail.entrySet()) {
+            Vehicle value = entry.getValue();
+            if (value.brand.equals("Bmw")) {
+                counter++;
+            }
+        }
+        return counter;
+    }
 }
