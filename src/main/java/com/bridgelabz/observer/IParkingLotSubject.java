@@ -5,5 +5,5 @@ public interface IParkingLotSubject {
 
     public void unRegister(IParkingLotObserver observers);
 
-    public void notifyObservers();
+    public void notifyObservers(int parkingLotSize);
 }
