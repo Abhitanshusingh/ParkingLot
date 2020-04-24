@@ -177,6 +177,7 @@ public class ParkingLotTest {
         parkingLotSystem.park(vehicle2, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle3, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle4, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle5, DriverType.HANDICAPPED, VehicleType.SMALL);
         for (Map.Entry<Slot, Vehicle> entry : parkingLotSystem.vehicleParkedDetail.entrySet()) {
             if (entry.getValue().getDriverType().equals(DriverType.HANDICAPPED)) {
                 Assert.assertEquals(1, entry.getKey().lot.lotID);
@@ -191,10 +192,11 @@ public class ParkingLotTest {
         parkingLotSystem.park(vehicle2, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle3, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle4, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle5, DriverType.NORMAL, VehicleType.LARGE);
         for (Map.Entry<Slot, Vehicle> entry : parkingLotSystem.vehicleParkedDetail.entrySet()) {
             if (entry.getValue().getDriverType().equals(VehicleType.LARGE)) {
                 Assert.assertEquals(1, entry.getKey().lot.lotID);
-                Assert.assertEquals(4, entry.getKey().slotID);
+                Assert.assertEquals(5, entry.getKey().slotID);
                 Assert.assertEquals(6, entry.getKey().slotID);
             }
         }
