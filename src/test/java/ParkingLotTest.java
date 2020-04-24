@@ -25,6 +25,8 @@ public class ParkingLotTest {
     Vehicle vehicle2 = new Vehicle("Thar", 5555, "Mahindra", "Black");
     Vehicle vehicle3 = new Vehicle("Camaro LT", 9999, "Chevrolet", "White");
     Vehicle vehicle4 = new Vehicle("Chiron", 1212, "Bugatti", "White");
+    Vehicle vehicle5 = new Vehicle("Fortuner", 1010, "Toyota", "Blue");
+    Vehicle vehicle6 = new Vehicle("Vellfire", 1010, "Toyota", "Blue");
 
     @Before
     public void SetUp() throws Exception {
@@ -206,5 +208,16 @@ public class ParkingLotTest {
         parkingLotSystem.park(vehicle3, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle4, DriverType.NORMAL, VehicleType.SMALL);
         Assert.assertEquals(2, parkingLotSystem.getWhiteCars());
+    }
+
+    @Test
+    public void givenParkingLot_whenParkedToyotaCars_shouldReturnNumberOfToyotaCars() throws ParkingLotException {
+        parkingLotSystem.park(vehicle1, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle2, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle3, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle4, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle5, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle6, DriverType.NORMAL, VehicleType.SMALL);
+        Assert.assertEquals(2, parkingLotSystem.getBlueToyotaCars());
     }
 }
