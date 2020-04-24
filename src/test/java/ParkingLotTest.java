@@ -1,11 +1,8 @@
-import com.bridgelabz.entity.Slot;
-import com.bridgelabz.entity.Vehicle;
-import com.bridgelabz.enumeration.DriverType;
-import com.bridgelabz.enumeration.VehicleType;
+import com.bridgelabz.entity.*;
+import com.bridgelabz.enumeration.*;
 import com.bridgelabz.exception.ParkingLotException;
 import com.bridgelabz.service.ParkingLotSystem;
-import com.bridgelabz.utility.AirportSecurity;
-import com.bridgelabz.utility.ParkingLotOwner;
+import com.bridgelabz.utility.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +23,9 @@ public class ParkingLotTest {
     Vehicle vehicle3 = new Vehicle("Camaro LT", 9999, "Chevrolet", "White");
     Vehicle vehicle4 = new Vehicle("Chiron", 1212, "Bugatti", "White");
     Vehicle vehicle5 = new Vehicle("Fortuner", 1010, "Toyota", "Blue");
-    Vehicle vehicle6 = new Vehicle("Vellfire", 1010, "Toyota", "Blue");
+    Vehicle vehicle6 = new Vehicle("Vellfire", 1221, "Toyota", "Blue");
+    Vehicle vehicle7 = new Vehicle("Z4", 1789, "Bmw", "Black");
+    Vehicle vehicle8 = new Vehicle("8 Series", 1415, "Bmw", "White");
 
     @Before
     public void SetUp() throws Exception {
@@ -219,5 +218,18 @@ public class ParkingLotTest {
         parkingLotSystem.park(vehicle5, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle6, DriverType.NORMAL, VehicleType.SMALL);
         Assert.assertEquals(2, parkingLotSystem.getBlueToyotaCars());
+    }
+
+    @Test
+    public void givenParkingLot_whenParkedBmwCars_shouldReturnNumberOfBmwCars() throws ParkingLotException {
+        parkingLotSystem.park(vehicle1, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle2, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle3, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle4, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle5, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle6, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle7, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle8, DriverType.NORMAL, VehicleType.SMALL);
+        Assert.assertEquals(2, parkingLotSystem.getBmwCars());
     }
 }
