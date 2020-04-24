@@ -1,9 +1,8 @@
 package com.bridgelabz.utility;
 
-import com.bridgelabz.entity.ParkingLot;
-import com.bridgelabz.entity.Slot;
-import com.bridgelabz.entity.Vehicle;
+import com.bridgelabz.entity.*;
 import com.bridgelabz.enumeration.DriverType;
+import com.bridgelabz.enumeration.VehicleType;
 import com.bridgelabz.exception.ParkingLotException;
 import com.bridgelabz.observer.IParkingLotObserver;
 import com.bridgelabz.observer.IParkingLotSubject;
@@ -27,10 +26,13 @@ public class ParkingLotAttendant implements IParkingLotSubject {
         this.vehicleParkedDetail = new HashMap<>();
     }
 
-    public HashMap<Slot, Vehicle> attendantPark(Vehicle vehicle, DriverType driverType) throws ParkingLotException {
+    public HashMap<Slot, Vehicle> attendantPark(Vehicle vehicle, DriverType driverType, VehicleType vehicleType) throws ParkingLotException {
         if (vehicleParkedDetail.size() > this.parkingLotCapacity)
             throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SPACE, "Parking lot is full");
+        if (vehicleType.equals(VehicleType.LARGE))
+        largeParking(vehicle, driverType);
         vehicle.setDriverType(driverType);
+        vehicle.setVehicleType(vehicleType);
         slotCounter = slotCounter + 1;
         Slot slot = new Slot();
         slot.setSlotID(slotCounter);
@@ -71,5 +73,21 @@ public class ParkingLotAttendant implements IParkingLotSubject {
         for (IParkingLotObserver vehicleObserver : observers) {
             vehicleObserver.sendParkingStatus(assignedSlot, this.parkingLotCapacity);
         }
+    }
+
+    public void largeParking(Vehicle vehicle, DriverType driverType) {
+        vehicle.setDriverType(driverType);
+        vehicle.setVehicleType(VehicleType.LARGE);
+        Slot slot = new Slot();
+        slotCounter = slotCounter + 1;
+        slot.setSlotID(slotCounter);
+        slot.setArrivalTime(LocalTime.of(11, 10, 37));
+        ParkingLot lot = new ParkingLot(AssignParkingLot.assignLot(slot.getSlotID()));
+        slot.setLot(lot);
+        vehicleParkedDetail.put(slot, vehicle);
+        slotCounter = slotCounter + 1;
+        slot.setSlotID(slotCounter);
+        vehicleParkedDetail.put(slot, vehicle);
+        this.notifyObservers(vehicleParkedDetail.size());
     }
 }

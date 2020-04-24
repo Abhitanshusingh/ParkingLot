@@ -1,6 +1,7 @@
 package com.bridgelabz.entity;
 
 import com.bridgelabz.enumeration.DriverType;
+import com.bridgelabz.enumeration.VehicleType;
 
 import java.util.Objects;
 
@@ -10,6 +11,7 @@ public class Vehicle {
     public String brand;
     public String colour;
     public DriverType driverType;
+    public VehicleType vehicleType;
 
     public DriverType getDriverType() {
         return driverType;
@@ -17,6 +19,14 @@ public class Vehicle {
 
     public void setDriverType(DriverType driverType) {
         this.driverType = driverType;
+    }
+
+    public VehicleType getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
     public Vehicle(String name, int plateNumber, String brand, String colour) {
@@ -34,6 +44,7 @@ public class Vehicle {
                 ", brand='" + brand + '\'' +
                 ", colour='" + colour + '\'' +
                 ", driverType=" + driverType +
+                ", vehicleType=" + vehicleType +
                 '}';
     }
 
@@ -46,6 +57,7 @@ public class Vehicle {
                 Objects.equals(name, vehicle.name) &&
                 Objects.equals(brand, vehicle.brand) &&
                 Objects.equals(colour, vehicle.colour) &&
+                driverType == vehicle.driverType &&
                 driverType == vehicle.driverType;
     }
 }
