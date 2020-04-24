@@ -55,12 +55,23 @@ public class ParkingLotSystem {
     }
 
     public int getWhiteCars() {
-        ArrayList whiteCars = new ArrayList();
+        int counter = 0;
         for (Map.Entry<Slot, Vehicle> entry : vehicleParkedDetail.entrySet()) {
             if (entry.getValue().colour.equals("White")) {
-                whiteCars.add(entry);
+                counter++;
             }
         }
-        return whiteCars.size();
+        return counter;
+    }
+
+    public int getBlueToyotaCars() {
+        int counter = 0;
+        for (Map.Entry<Slot, Vehicle> entry : vehicleParkedDetail.entrySet()) {
+            Vehicle value = entry.getValue();
+            if (value.brand.equals("Toyota") && value.colour.equals("Blue")) {
+                counter++;
+            }
+        }
+        return counter;
     }
 }
