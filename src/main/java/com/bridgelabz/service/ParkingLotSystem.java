@@ -53,4 +53,14 @@ public class ParkingLotSystem {
         }
         return arrivalTime;
     }
+
+    public int getWhiteCars() {
+        ArrayList whiteCars = new ArrayList();
+        for (Map.Entry<Slot, Vehicle> entry : vehicleParkedDetail.entrySet()) {
+            if (entry.getValue().colour.equals("White")) {
+                whiteCars.add(entry);
+            }
+        }
+        return whiteCars.size();
+    }
 }
