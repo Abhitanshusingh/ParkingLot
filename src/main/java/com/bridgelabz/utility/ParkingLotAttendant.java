@@ -3,6 +3,7 @@ package com.bridgelabz.utility;
 import com.bridgelabz.entity.ParkingLot;
 import com.bridgelabz.entity.Slot;
 import com.bridgelabz.entity.Vehicle;
+import com.bridgelabz.enumeration.DriverType;
 import com.bridgelabz.exception.ParkingLotException;
 import com.bridgelabz.observer.IParkingLotObserver;
 import com.bridgelabz.observer.IParkingLotSubject;
@@ -26,9 +27,10 @@ public class ParkingLotAttendant implements IParkingLotSubject {
         this.vehicleParkedDetail = new HashMap<>();
     }
 
-    public HashMap<Slot, Vehicle> attendantPark(Vehicle vehicle) throws ParkingLotException {
+    public HashMap<Slot, Vehicle> attendantPark(Vehicle vehicle, DriverType driverType) throws ParkingLotException {
         if (vehicleParkedDetail.size() > this.parkingLotCapacity)
             throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SPACE, "Parking lot is full");
+        vehicle.setDriverType(driverType);
         slotCounter = slotCounter + 1;
         Slot slot = new Slot();
         slot.setSlotID(slotCounter);

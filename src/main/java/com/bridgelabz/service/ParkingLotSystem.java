@@ -2,6 +2,7 @@ package com.bridgelabz.service;
 
 import com.bridgelabz.entity.Slot;
 import com.bridgelabz.entity.Vehicle;
+import com.bridgelabz.enumeration.DriverType;
 import com.bridgelabz.exception.ParkingLotException;
 import com.bridgelabz.utility.*;
 
@@ -23,8 +24,8 @@ public class ParkingLotSystem {
         this.parkingLotAttendant = new ParkingLotAttendant(parkingLotCapacity, noOfParkingLots, assignParkingLot.getNoOfSlotsPerLot());
     }
 
-    public void park(Vehicle vehicle) throws ParkingLotException {
-        vehicleParkedDetail = parkingLotAttendant.attendantPark(vehicle);
+    public void park(Vehicle vehicle, DriverType driverType) throws ParkingLotException {
+        vehicleParkedDetail = parkingLotAttendant.attendantPark(vehicle, driverType);
     }
 
     public void unPark(Vehicle vehicle) throws ParkingLotException {
