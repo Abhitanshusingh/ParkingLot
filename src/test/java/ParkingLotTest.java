@@ -142,7 +142,7 @@ public class ParkingLotTest {
     @Test
     public void givenAVehicle_whenParkedAndThenUnparked_shouldReturnTotalTimeParked() throws ParkingLotException {
         parkingLotSystem.park(vehicle1, DriverType.NORMAL, VehicleType.SMALL);
-        Assert.assertEquals(parkingLotSystem.getArrivalTime(vehicle1), LocalTime.of(12, 10, 20));
+        Assert.assertEquals(parkingLotSystem.getArrivalTime(vehicle1), 13);
     }
 
     @Test
@@ -233,5 +233,15 @@ public class ParkingLotTest {
         parkingLotSystem.park(vehicle7, DriverType.NORMAL, VehicleType.SMALL);
         parkingLotSystem.park(vehicle8, DriverType.NORMAL, VehicleType.SMALL);
         Assert.assertEquals(2, parkingLotSystem.getBmwCars());
+    }
+
+    @Test
+    public void givenParkingLot_whenParkedVehicle_shouldReturnLat30MinCaredParked() throws ParkingLotException {
+        parkingLotSystem.park(vehicle1, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle2, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle3, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle4, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle5, DriverType.NORMAL, VehicleType.SMALL);
+        Assert.assertEquals(5, parkingLotSystem.getBeforeThirtyMinuteParkedCar());
     }
 }
