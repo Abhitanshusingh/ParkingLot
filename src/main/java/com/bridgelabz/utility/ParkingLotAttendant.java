@@ -11,11 +11,11 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class ParkingLotAttendant implements IParkingLotSubject {
-    public int parkingLotCapacity = 0;
-    public int noOfParkingLots = 0;
-    public int noOfSlotsPerLot = 0;
+    public int parkingLotCapacity;
+    public int noOfParkingLots;
+    public int noOfSlotsPerLot;
     public int slotCounter = 0;
-
+    LocalTime localTime = java.time.LocalTime.now();
     private ArrayList<IParkingLotObserver> observers = new ArrayList<IParkingLotObserver>();
     public HashMap<Slot, Vehicle> vehicleParkedDetail;
 
@@ -30,13 +30,13 @@ public class ParkingLotAttendant implements IParkingLotSubject {
         if (vehicleParkedDetail.size() > this.parkingLotCapacity)
             throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SPACE, "Parking lot is full");
         if (vehicleType.equals(VehicleType.LARGE))
-        largeParking(vehicle, driverType);
+            largeParking(vehicle, driverType);
         vehicle.setDriverType(driverType);
         vehicle.setVehicleType(vehicleType);
         slotCounter = slotCounter + 1;
         Slot slot = new Slot();
         slot.setSlotID(slotCounter);
-        slot.setArrivalTime(LocalTime.of(12, 10, 20));
+        slot.setArrivalTime(localTime.getHour(), localTime.getMinute());
         ParkingLot lot = new ParkingLot(AssignParkingLot.assignLot(slot.getSlotID()));
         slot.setLot(lot);
         vehicleParkedDetail.put(slot, vehicle);
@@ -50,7 +50,7 @@ public class ParkingLotAttendant implements IParkingLotSubject {
         Set<Slot> slots = vehicleParkedDetail.keySet();
         for (Slot slot : slots) {
             if (vehicleParkedDetail.get(slot).equals(vehicle)) {
-                slot.setDepartureTime(LocalTime.of(11, 25, 45));
+                slot.setDepartureTime(localTime.getHour(), localTime.getMinute());
                 vehicleParkedDetail.remove(slot);
                 this.notifyObservers(this.vehicleParkedDetail.size());
             }
@@ -81,7 +81,7 @@ public class ParkingLotAttendant implements IParkingLotSubject {
         Slot slot = new Slot();
         slotCounter = slotCounter + 1;
         slot.setSlotID(slotCounter);
-        slot.setArrivalTime(LocalTime.of(11, 10, 37));
+        slot.setArrivalTime(localTime.getHour(), localTime.getMinute());
         ParkingLot lot = new ParkingLot(AssignParkingLot.assignLot(slot.getSlotID()));
         slot.setLot(lot);
         vehicleParkedDetail.put(slot, vehicle);
@@ -89,5 +89,25 @@ public class ParkingLotAttendant implements IParkingLotSubject {
         slot.setSlotID(slotCounter);
         vehicleParkedDetail.put(slot, vehicle);
         this.notifyObservers(vehicleParkedDetail.size());
+    }
+
+    public int getBeforeThirtyMinuteParkedCar() {
+        int counter = 0;
+        int currentHour = localTime.getHour();
+        int currentMinute = localTime.getMinute();
+        Set<Slot> slots = vehicleParkedDetail.keySet();
+        for (Slot slot : slots) {
+            {
+                int hour = 0;
+                int min = 0;
+                hour = currentHour - slot.arrivalHour;
+                min = currentMinute - slot.arrivalMinute;
+                int totalTime = ( ( hour * 60) + min );
+                if (totalTime <= 30) {
+                    counter++;
+                }
+            }
+        }
+        return counter;
     }
 }

@@ -6,14 +6,12 @@ import com.bridgelabz.enumeration.DriverType;
 import com.bridgelabz.enumeration.VehicleType;
 import com.bridgelabz.exception.ParkingLotException;
 import com.bridgelabz.utility.*;
-
-import java.time.LocalTime;
 import java.util.*;
 
 public class ParkingLotSystem {
 
     public int noOfSlotsPerLot;
-    public LocalTime arrivalTime;
+    public int arrivalTime;
     ParkingLotAttendant parkingLotAttendant = null;
     AssignParkingLot assignParkingLot = null;
 
@@ -45,10 +43,10 @@ public class ParkingLotSystem {
         return vehicleParkedDetail.containsValue(vehicle);
     }
 
-    public LocalTime getArrivalTime(Vehicle vehicle) {
+    public int getArrivalTime(Vehicle vehicle) {
         for (Slot slot : vehicleParkedDetail.keySet()) {
             if (vehicleParkedDetail.get(slot).equals(vehicle)) {
-                arrivalTime = slot.getArrivalTime();
+                arrivalTime = slot.arrivalHour;
             }
         }
         return arrivalTime;
@@ -84,5 +82,9 @@ public class ParkingLotSystem {
             }
         }
         return counter;
+    }
+
+    public int getBeforeThirtyMinuteParkedCar() {
+        return parkingLotAttendant.getBeforeThirtyMinuteParkedCar();
     }
 }

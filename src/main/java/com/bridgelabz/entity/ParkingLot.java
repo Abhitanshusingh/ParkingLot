@@ -1,7 +1,7 @@
 package com.bridgelabz.entity;
 
 public class ParkingLot {
-    public int lotID = 0;
+    public int lotID;
 
     public ParkingLot(int lotId) {
         this.lotID = lotId;
