@@ -15,7 +15,8 @@ public class ParkingLotAttendant implements IParkingLotSubject {
     public int noOfParkingLots;
     public int noOfSlotsPerLot;
     public int slotCounter = 0;
-    public static double parkedCharge =0;
+    public static double parkedCharge = 0;
+    public static int noOfCarsParkedInLot = 0;
     LocalTime localTime = java.time.LocalTime.now();
     private ArrayList<IParkingLotObserver> observers = new ArrayList<IParkingLotObserver>();
     public HashMap<Slot, Vehicle> vehicleParkedDetail;
@@ -25,6 +26,10 @@ public class ParkingLotAttendant implements IParkingLotSubject {
         this.noOfParkingLots = noOfParkingLots;
         this.noOfSlotsPerLot = noOfSlotsPerLot;
         this.vehicleParkedDetail = new HashMap<>();
+    }
+
+    public ParkingLotAttendant() {
+
     }
 
     public HashMap<Slot, Vehicle> attendantPark(Vehicle vehicle, DriverType driverType, VehicleType vehicleType) throws ParkingLotException {
@@ -42,6 +47,7 @@ public class ParkingLotAttendant implements IParkingLotSubject {
         slot.setLot(lot);
         vehicleParkedDetail.put(slot, vehicle);
         this.notifyObservers(vehicleParkedDetail.size());
+        noOfCarsParkedInLot++;
         return vehicleParkedDetail;
     }
 
