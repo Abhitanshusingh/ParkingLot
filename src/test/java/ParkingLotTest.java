@@ -252,4 +252,28 @@ public class ParkingLotTest {
         parkingLotSystem.park(vehicle5, DriverType.NORMAL, VehicleType.SMALL);
         Assert.assertEquals(5, parkingLotSystem.getBeforeThirtyMinuteParkedCar());
     }
+
+    @Test
+    public void givenParkingLot_whenParkedVehicle_shouldReturnTotalCarsParkedOnLot() throws ParkingLotException {
+        parkingLotSystem.park(vehicle1, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle2, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle3, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle4, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle5, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle6, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle7, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle8, DriverType.NORMAL, VehicleType.SMALL);
+        Assert.assertEquals(8, ParkingLotAttendant.noOfCarsParkedInLot);
+    }
+
+    @Test
+    public void givenParkingLot_whenParkedVehicle_shouldReturnTotalCarsParkedOnLot1() throws ParkingLotException {
+        parkingLotSystem.park(vehicle1, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle2, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle3, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle4, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle5, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.park(vehicle6, DriverType.NORMAL, VehicleType.SMALL);
+        Assert.assertNotEquals(8, ParkingLotAttendant.noOfCarsParkedInLot);
+    }
 }
