@@ -15,6 +15,7 @@ public class ParkingLotAttendant implements IParkingLotSubject {
     public int noOfParkingLots;
     public int noOfSlotsPerLot;
     public int slotCounter = 0;
+    public static double parkedCharge =0;
     LocalTime localTime = java.time.LocalTime.now();
     private ArrayList<IParkingLotObserver> observers = new ArrayList<IParkingLotObserver>();
     public HashMap<Slot, Vehicle> vehicleParkedDetail;
@@ -51,6 +52,7 @@ public class ParkingLotAttendant implements IParkingLotSubject {
         for (Slot slot : slots) {
             if (vehicleParkedDetail.get(slot).equals(vehicle)) {
                 slot.setDepartureTime(localTime.getHour(), localTime.getMinute());
+                this.generateBillOfParkedCar(slot);
                 vehicleParkedDetail.remove(slot);
                 this.notifyObservers(this.vehicleParkedDetail.size());
             }
@@ -102,12 +104,23 @@ public class ParkingLotAttendant implements IParkingLotSubject {
                 int min = 0;
                 hour = currentHour - slot.arrivalHour;
                 min = currentMinute - slot.arrivalMinute;
-                int totalTime = ( ( hour * 60) + min );
+                int totalTime = ((hour * 60) + min);
                 if (totalTime <= 30) {
                     counter++;
                 }
             }
         }
         return counter;
+    }
+
+    public double generateBillOfParkedCar(Slot slot) {
+        double chargePerMinute = 0.5;
+        int currentHour = localTime.getHour();
+        int currentMinute = localTime.getMinute();
+        int hour = currentHour - slot.arrivalHour;
+        int min = currentMinute - slot.arrivalMinute;
+        int totalTime = ((hour * 60) + min);
+        parkedCharge = totalTime * chargePerMinute;
+        return parkedCharge;
     }
 }
