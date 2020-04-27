@@ -140,9 +140,17 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void givenAVehicle_whenParkedAndThenUnparked_shouldReturnTotalTimeParked() throws ParkingLotException {
+    public void givenAVehicle_whenParkedAndThenUnparked_shouldReturnChargesOfVehicle() throws ParkingLotException {
         parkingLotSystem.park(vehicle1, DriverType.NORMAL, VehicleType.SMALL);
-        Assert.assertEquals(parkingLotSystem.getArrivalTime(vehicle1), 13);
+        parkingLotSystem.unPark(vehicle1);
+        Assert.assertEquals(ParkingLotAttendant.parkedCharge, 0,0.0);
+    }
+
+    @Test
+    public void givenAVehicle_whenParkedAndThenUnparked_shouldReturnChargesOfVehicle1() throws ParkingLotException {
+        parkingLotSystem.park(vehicle1, DriverType.NORMAL, VehicleType.SMALL);
+        parkingLotSystem.unPark(vehicle1);
+        Assert.assertNotEquals(ParkingLotAttendant.parkedCharge, 0.5,0.0);
     }
 
     @Test
